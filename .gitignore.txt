@@ -1,0 +1,24 @@
+# Godot-specific ignores
+.godot/
+
+# Mono-specific ignores
+.mono/
+
+# Asset-library-specific ignores
+.import/
+
+# Export templates
+export_presets.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# User-generated content
+# We recommend ignoring all user-generated content by default.
+#
+# This is a good default for projects that are not meant to be
+# distributed with user-generated content.
+#
+# You can remove this ignore if you want to track user-generated
+# content in your repository.
+user://

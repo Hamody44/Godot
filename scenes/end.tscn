@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqyd45scgy2dn"]
+
+[ext_resource type="Texture2D" uid="uid://bc876jdrs7fkf" path="res://assets/green-painted-smooth-textured-background.jpg" id="1_p7m4f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mwn6m"]
+font_size = 100
+
+[node name="end" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 6000.0
+offset_bottom = 4000.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_p7m4f")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 227.0
+offset_right = 911.0
+offset_bottom = 364.0
+text = "you finished"
+label_settings = SubResource("LabelSettings_mwn6m")

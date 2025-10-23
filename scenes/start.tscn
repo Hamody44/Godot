@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://0aos1h7rpr3r"]
+
+[ext_resource type="Texture2D" uid="uid://bc876jdrs7fkf" path="res://assets/green-painted-smooth-textured-background.jpg" id="1_jaeev"]
+[ext_resource type="Texture2D" uid="uid://kq8blh7eu1wa" path="res://assets/Start-Button.png" id="2_bodal"]
+[ext_resource type="Script" uid="uid://1t0qk5oyb714" path="res://scripts/texture_button.gd" id="3_bodal"]
+
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 6000.0
+offset_bottom = 4000.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_jaeev")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 482.00003
+offset_top = 286.0
+offset_right = 1292.0
+offset_bottom = 676.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("2_bodal")
+script = ExtResource("3_bodal")
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
