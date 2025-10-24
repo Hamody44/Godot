@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bc876jdrs7fkf" path="res://assets/green-painted-smooth-textured-background.jpg" id="1_ah8om"]
 [ext_resource type="Texture2D" uid="uid://dsb1njllkien6" path="res://assets/Dungeon Tileset.png" id="2_p6vls"]
 [ext_resource type="PackedScene" uid="uid://cpcp32xkh0g72" path="res://scenes/player.tscn" id="3_hhfj6"]
-[ext_resource type="PackedScene" uid="uid://b40oep0e5k0eo" path="res://scenes/skeleton.tscn" id="4_wae8j"]
+[ext_resource type="PackedScene" uid="uid://bhkmas5i2ooc5" path="res://scenes/venom.tscn" id="5_ah8om"]
 [ext_resource type="Script" uid="uid://bc6yy1pilm1cx" path="res://scenes/door.gd" id="5_ha73p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vcx5n"]
@@ -714,9 +714,6 @@ position = Vector2(284, 351)
 position = Vector2(579, 324)
 zoom = Vector2(1.5, 1.5)
 
-[node name="skeleton" parent="." instance=ExtResource("4_wae8j")]
-position = Vector2(723, 356)
-
 [node name="door" type="Area2D" parent="."]
 position = Vector2(767, 304)
 script = ExtResource("5_ha73p")
@@ -732,5 +729,8 @@ offset_right = 303.0
 offset_bottom = 221.0
 text = "3/3"
 label_settings = SubResource("LabelSettings_ah8om")
+
+[node name="venom" parent="." instance=ExtResource("5_ah8om")]
+position = Vector2(697, 356)
 
 [connection signal="body_entered" from="door" to="door" method="_on_body_entered"]

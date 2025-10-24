@@ -321,7 +321,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yjqjo")
 }],
-"loop": false,
+"loop": true,
 "name": &"walk",
 "speed": 10.0
 }]
@@ -341,6 +341,6 @@ shape = SubResource("RectangleShape2D_txkty")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rjsi3")
-animation = &"attack"
-frame = 8
+animation = &"walk"
+frame = 9
 frame_progress = 1.0
