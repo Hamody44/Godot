@@ -25,9 +25,5 @@ func _on_body_entered(body: Node2D) -> void:
 			target_scene_path = END_SCENE_PATH
 			print("All levels completed! Loading end scene: ", target_scene_path)
 		
-		# 4. تنفيذ تغيير المشهد
-		var error_code = get_tree().change_scene_to_file(target_scene_path)
-		
-		# 5. التحقق من نجاح العملية
-		if error_code != OK:
-			print("FATAL ERROR: Failed to load scene: ", target_scene_path)
+		# تنفيذ تغيير المشهد - استخدام call_deferred لتجنب خطأ الفيزياء
+		get_tree().call_deferred("change_scene_to_file", target_scene_path)

@@ -101,7 +101,8 @@ func take_damage(damage: int = 1):
 	current_health -= damage
 	print("Player took damage! Health: ", current_health)
 	health_changed.emit(current_health)
-	label.text = str(current_health) + "/ 3"
+	if label:
+		label.text = str(current_health) + "/ 3"
 	
 	if current_health <= 0:
 		die()
@@ -142,6 +143,24 @@ func attack_enemies():
 	for enemy in enemies:
 		if enemy and is_instance_valid(enemy) and enemy.has_method("take_damage"):
 			var distance = global_position.distance_to(enemy.global_position)
+			
+			# Check if enemy is within attack range
 			if distance <= ATTACK_RANGE:
-				enemy.take_damage(1)
-				print("Player attacked enemy!")
+				# Determine which direction player is facing
+				var is_facing_left = animated_sprite.flip_h
+				
+				# Calculate if enemy is in front of player
+				var enemy_direction = enemy.global_position.x - global_position.x
+				var is_enemy_in_front = false
+				
+				if is_facing_left:
+					# Player facing left, enemy must be to the left (negative direction)
+					is_enemy_in_front = enemy_direction < 0
+				else:
+					# Player facing right, enemy must be to the right (positive direction)
+					is_enemy_in_front = enemy_direction > 0
+				
+				# Only damage if enemy is in front
+				if is_enemy_in_front:
+					enemy.take_damage(1)
+					print("Player attacked enemy in front!")

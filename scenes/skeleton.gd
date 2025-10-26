@@ -121,8 +121,8 @@ func update_animation():
 	if not animated_sprite:
 		return
 		
-	# Don't change animation while attacking or if attack animation is playing
-	if is_attacking or animated_sprite.animation == "attack":
+	# Don't change animation while attacking
+	if is_attacking:
 		return
 		
 	var is_moving = abs(velocity.x) > 0.1 # Check if the skeleton is actually moving
