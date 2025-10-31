@@ -13,7 +13,7 @@ var current_health = 1
 var is_dead = false
 
 # AI variables
-var player = null
+var player: CharacterBody2D = null # Type hint for player
 var is_attacking = false
 var attack_cooldown = 0.0
 var is_chasing = false
@@ -23,10 +23,10 @@ func _ready():
 	add_to_group("enemy")
 	
 	# Find the player node
-	player = get_tree().get_first_node_in_group("player")
+	player = get_tree().get_first_node_in_group("player") as CharacterBody2D # Cast to CharacterBody2D
 	if not player:
 		# If no player in group, try to find by name
-		player = get_node("../Player")  # Adjust path as needed
+		player = get_node("../Player") as CharacterBody2D # Adjust path as needed
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -87,6 +87,11 @@ func attack_player():
 		return
 		
 	if not player or not is_instance_valid(player):
+		return
+		
+	# NEW: Prevent attack if player is in the air
+	if not player.is_on_floor():
+		# print("Player is in the air, cannot attack.")
 		return
 		
 	is_attacking = true

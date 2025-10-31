@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -280.0 # Reduced by 30% from -400.0
 
 var is_attacking = false
 var attack_cooldown = 0.0
@@ -14,6 +14,9 @@ var max_health = 3
 var current_health = 3
 var is_dead = false
 @onready var label: Label = $"../Label"
+
+# Double Jump
+var has_double_jump_available = true
 
 # Signal for health changes
 signal health_changed(new_health: int)
@@ -30,10 +33,20 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	else:
+		# Reset double jump when player lands on the floor
+		has_double_jump_available = true
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor():
+			velocity.y = JUMP_VELOCITY
+			# Ensure double jump is available after a single jump from the ground
+			has_double_jump_available = true
+		elif has_double_jump_available: # Allow double jump if in air and available
+			velocity.y = JUMP_VELOCITY
+			has_double_jump_available = false
+			animated_sprite.play("double jump") # Play double jump animation
 
 	# Handle attack
 	if Input.is_action_just_pressed("attack") and not is_attacking and attack_cooldown <= 0:
@@ -73,10 +86,20 @@ func update_animation():
 		var frame_count = animated_sprite.sprite_frames.get_frame_count(current_anim)
 		if animated_sprite.frame == frame_count - 1 and animated_sprite.frame_progress >= 0.9:
 			is_attacking = false
-		return
+		return # Attack animation takes precedence
+
+	# If "double_jump" animation is currently playing, let it finish.
+	# We only return if it's still playing, otherwise, fall through to other checks.
+	if animated_sprite.animation == "double_jump" and animated_sprite.is_playing():
+		# Allow flipping during double jump
+		if abs(velocity.x) > 0.1:
+			animated_sprite.flip_h = velocity.x < 0
+		return # Double jump animation takes precedence until it finishes
 	
 	# Jump animation takes priority
 	if not is_on_floor():
+		# Only play "jump" animation if current animation is not already "jump"
+		# (and not "double_jump" which is handled above).
 		if animated_sprite.animation != "jump":
 			animated_sprite.play("jump")
 		# Flip sprite based on direction while jumping

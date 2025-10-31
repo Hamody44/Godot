@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cpcp32xkh0g72"]
+[gd_scene load_steps=36 format=3 uid="uid://cpcp32xkh0g72"]
 
 [ext_resource type="Script" uid="uid://dpp7ko25b1hta" path="res://scenes/player.gd" id="1_jej6c"]
 [ext_resource type="Texture2D" uid="uid://dwyb8gnd7a2qd" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack1-00.png" id="2_f1ej7"]
@@ -29,6 +29,10 @@
 [ext_resource type="Texture2D" uid="uid://gr4v2sdhii8q" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-die-05.png" id="16_md1ol"]
 [ext_resource type="Texture2D" uid="uid://dxjau5g840huc" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-die-06.png" id="17_bj30b"]
 [ext_resource type="Texture2D" uid="uid://c5w62krje8kv8" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-jump-03.png" id="17_jump3"]
+[ext_resource type="Texture2D" uid="uid://djrvcc1iqdne2" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-smrslt-00.png" id="18_487ah"]
+[ext_resource type="Texture2D" uid="uid://bewxf4d6y6x0x" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-smrslt-01.png" id="19_md1ol"]
+[ext_resource type="Texture2D" uid="uid://c7qa1pt2jf7ky" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-smrslt-02.png" id="20_bj30b"]
+[ext_resource type="Texture2D" uid="uid://dy2ri6itjdelc" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-smrslt-03.png" id="21_jc3p3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujl30"]
 size = Vector2(20, 26)
@@ -100,6 +104,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("18_487ah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_md1ol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_bj30b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_jc3p3")
+}],
+"loop": false,
+"name": &"double jump",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_fulsm")
 }, {
 "duration": 1.0,
@@ -165,4 +186,4 @@ shape = SubResource("RectangleShape2D_ujl30")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_31cv2")
-animation = &"death"
+animation = &"double jump"

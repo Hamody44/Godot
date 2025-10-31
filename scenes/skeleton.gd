@@ -88,6 +88,11 @@ func attack_player():
 		
 	if not player or not is_instance_valid(player):
 		return
+	
+	# NEW: Only attack if the player is on the ground
+	if not player.is_on_floor():
+		print("Skeleton cannot attack: Player is in the air.")
+		return
 		
 	is_attacking = true
 	attack_cooldown = ATTACK_COOLDOWN_TIME
