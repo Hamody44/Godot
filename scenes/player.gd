@@ -48,19 +48,33 @@ func _physics_process(delta: float) -> void:
 			has_double_jump_available = false
 			animated_sprite.play("double jump") # Play double jump animation
 
-	# Handle attack
-	if Input.is_action_just_pressed("attack") and not is_attacking and attack_cooldown <= 0:
+	# Handle attacks
+	var wants_to_attack = false
+	var attack_animation_name = ""
+
+	if Input.is_action_just_pressed("attack"):
+		wants_to_attack = true
+		# Use different attack animation based on whether player is in air or on ground for default attack
+		if not is_on_floor():
+			attack_animation_name = "air_attack"
+		else:
+			attack_animation_name = "attack"
+	elif Input.is_action_just_pressed("attack1"):
+		wants_to_attack = true
+		attack_animation_name = "attack1"
+	elif Input.is_action_just_pressed("attack2"):
+		wants_to_attack = true
+		attack_animation_name = "attack2"
+
+	if wants_to_attack and not is_attacking and attack_cooldown <= 0:
 		is_attacking = true
 		attack_cooldown = ATTACK_COOLDOWN_TIME
-		# Use different attack animation based on whether player is in air or on ground
-		if not is_on_floor():
-			animated_sprite.play("air_attack")
-		else:
-			animated_sprite.play("attack")
+		animated_sprite.play(attack_animation_name)
 		# Stop horizontal movement during attack
 		velocity.x = 0
 		# Attack nearby enemies
 		attack_enemies()
+
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
@@ -83,9 +97,11 @@ func update_animation():
 	if is_attacking:
 		# Check if attack animation finished
 		var current_anim = animated_sprite.animation
-		var frame_count = animated_sprite.sprite_frames.get_frame_count(current_anim)
-		if animated_sprite.frame == frame_count - 1 and animated_sprite.frame_progress >= 0.9:
-			is_attacking = false
+		# Ensure the current_anim exists in sprite_frames before trying to get its frame count
+		if animated_sprite.sprite_frames.has_animation(current_anim):
+			var frame_count = animated_sprite.sprite_frames.get_frame_count(current_anim)
+			if animated_sprite.frame == frame_count - 1 and animated_sprite.frame_progress >= 0.9:
+				is_attacking = false
 		return # Attack animation takes precedence
 
 	# If "double_jump" animation is currently playing, let it finish.

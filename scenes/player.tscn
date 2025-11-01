@@ -1,14 +1,20 @@
-[gd_scene load_steps=36 format=3 uid="uid://cpcp32xkh0g72"]
+[gd_scene load_steps=42 format=3 uid="uid://cpcp32xkh0g72"]
 
 [ext_resource type="Script" uid="uid://dpp7ko25b1hta" path="res://scenes/player.gd" id="1_jej6c"]
 [ext_resource type="Texture2D" uid="uid://dwyb8gnd7a2qd" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack1-00.png" id="2_f1ej7"]
+[ext_resource type="Texture2D" uid="uid://b5qewrrxl0ya5" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack3-loop-00.png" id="2_j2b1d"]
+[ext_resource type="Texture2D" uid="uid://binqv2f1gvu2c" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack3-loop-01.png" id="3_cs1tg"]
 [ext_resource type="Texture2D" uid="uid://caadnp7whwop2" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack1-01.png" id="3_oprun"]
+[ext_resource type="Texture2D" uid="uid://boswqirw48h0l" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack3-rdy-00.png" id="4_2dvfe"]
 [ext_resource type="Texture2D" uid="uid://c721ylf1mgnk0" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack1-02.png" id="4_a8ls1"]
+[ext_resource type="Texture2D" uid="uid://bdyaktmm02mwe" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack-3-end-00.png" id="5_giy8y"]
 [ext_resource type="Texture2D" uid="uid://ceqaqioktexu3" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack1-03.png" id="5_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://dwd1ch8s7y8n7" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-attack1-00.png" id="6_a38lo"]
+[ext_resource type="Texture2D" uid="uid://c5bfulh50jgn2" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack-3-end-01.png" id="6_fdfoy"]
 [ext_resource type="Texture2D" uid="uid://b4316nxkuu6n7" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-idle-00.png" id="6_fulsm"]
 [ext_resource type="Texture2D" uid="uid://bx20kdbyr81mw" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-attack1-01.png" id="7_4ni07"]
 [ext_resource type="Texture2D" uid="uid://csghrvpfgn5bc" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-idle-01.png" id="7_4r5pv"]
+[ext_resource type="Texture2D" uid="uid://dyiisjpequl38" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-air-attack-3-end-02.png" id="7_hhpqf"]
 [ext_resource type="Texture2D" uid="uid://dk4mi3kvtqhel" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-run-00.png" id="8_60mlk"]
 [ext_resource type="Texture2D" uid="uid://perb8u58yjsm" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-attack1-02.png" id="8_l71n6"]
 [ext_resource type="Texture2D" uid="uid://dd03cip31v6a5" path="res://assets/Adventurer-1.5/Individual Sprites/adventurer-run-01.png" id="9_i4ail"]
@@ -41,18 +47,24 @@ size = Vector2(20, 26)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_f1ej7")
+"texture": ExtResource("2_j2b1d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_oprun")
+"texture": ExtResource("3_cs1tg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_a8ls1")
+"texture": ExtResource("4_2dvfe")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_qfm1y")
+"texture": ExtResource("5_giy8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fdfoy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hhpqf")
 }],
-"loop": false,
+"loop": true,
 "name": &"air_attack",
 "speed": 10.0
 }, {
@@ -73,7 +85,24 @@ animations = [{
 "texture": ExtResource("10_ujl30")
 }],
 "loop": false,
-"name": &"attack",
+"name": &"attack1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f1ej7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oprun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a8ls1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qfm1y")
+}],
+"loop": false,
+"name": &"attack2",
 "speed": 10.0
 }, {
 "frames": [{
@@ -186,4 +215,4 @@ shape = SubResource("RectangleShape2D_ujl30")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_31cv2")
-animation = &"double jump"
+animation = &"air_attack"
